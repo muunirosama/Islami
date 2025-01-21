@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:islami/cores/services/localstorage.dart';
 import 'package:islami/feautures/layout/pages/QuranDetails.dart';
 import 'package:islami/feautures/onboarding/pages/on-boardingscreen.dart';
 import 'package:islami/feautures/splash%20screens/pages/splash%20screen%201.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+ await LocalStorageServices.init();
+
   runApp(const MyApp());
 }
 

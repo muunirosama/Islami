@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/cores/constants/app_assets.dart';
+import 'package:islami/cores/services/LocalStorageKeys.dart';
+import 'package:islami/cores/services/localstorage.dart';
 import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/feautures/layout/pages/layout%20page.dart';
 import 'package:islami/feautures/onboarding/models/on-boardingmodel.dart';
@@ -18,6 +20,11 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   var activeIndex=0;
   var  controller = PageController();
+  @override
+  void initState() {
+    super.initState();
+    LocalStorageServices.setBool(LocalStoragekey.isFirstTimeRun, false);
+  }
   @override
   Widget build(BuildContext context) {
     var size= MediaQuery.of(context).size;

@@ -1,3 +1,3 @@
-// abstract class  LocalStoragekey{
-//   static String isFirstTimeRun ="isFirstTimeRun";
-// }
+abstract class  LocalStoragekey{
+  static String isFirstTimeRun ="isFirstTimeRun";
+}

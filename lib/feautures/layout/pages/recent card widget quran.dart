@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:islami/cores/constants/app_assets.dart';
 import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/models/recent-data.dart';
+import 'package:islami/models/sura.dart';
 
 class RecentCardQuran extends StatelessWidget {
-  const RecentCardQuran({super.key, required this.recentData});
-  final RecentData recentData;
+
+  final Sura suras;
+  RecentCardQuran({
+    super.key,
+    required this.suras
+});
 
   @override
   Widget build(BuildContext context) {
@@ -22,21 +27,21 @@ class RecentCardQuran extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(recentData.suraName,
+              Text(suras.nameEn,
               style: TextStyle(
                 color: AppColors.secondaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 24
               ),
               ),
-              Text(recentData.suraNameAr,
+              Text(suras.nameAr,
                 style: TextStyle(
                     color: AppColors.secondaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 24
                 ),
               ),
-              Text(recentData.suraVerses,
+              Text("${suras.verses} Verses",
                 style: TextStyle(
                     color: AppColors.secondaryColor,
                     fontWeight: FontWeight.bold,

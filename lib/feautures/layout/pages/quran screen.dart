@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/cores/constants/app_assets.dart';
+import 'package:islami/cores/services/LocalStorageKeys.dart';
+import 'package:islami/cores/services/localstorage.dart';
 import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/feautures/layout/pages/QuranDetails.dart';
 import 'package:islami/feautures/layout/pages/recent%20card%20widget%20quran.dart';
@@ -16,16 +18,14 @@ class QuranScreen extends StatefulWidget {
 }
 
 class _QuranScreenState extends State<QuranScreen> {
-  List<RecentData> recentDataList=[
-    RecentData(suraName: "Al-Anbia",
-        suraNameAr: "الأنبياء",
-        suraVerses:"112"),
-    RecentData(suraName: "Al-Fatiha",
-        suraNameAr: "الفاتحة",
-        suraVerses:"7")
-  ];
 
-  String searchQuery='';
+  @override
+  void initState(){
+    super.initState();
+    loadRecentSura();
+  }
+  List<Sura> recentDataList=[];
+  List<String> recentSuraIndex=[];
 
    List<Sura> suras =[
      Sura(id: 1, nameEn: "Al-Fatiha", nameAr: "الفاتحه", verses: 7),
@@ -143,6 +143,7 @@ class _QuranScreenState extends State<QuranScreen> {
      Sura(id: 113, nameEn: "Al-Falaq", nameAr: "الفلق", verses: 5),
      Sura(id: 114, nameEn: "An-Nas", nameAr: "الناس", verses: 6),
    ];
+  String searchQuery='';
 
    List<Sura> searchSuraModel=[];
 
@@ -246,14 +247,33 @@ class _QuranScreenState extends State<QuranScreen> {
                  ),
                  SizedBox(
                    height: 155,
-                   child: ListView.builder(
-                     padding: const EdgeInsets.symmetric(horizontal: 10),
-                     scrollDirection: Axis.horizontal,
-                     itemBuilder: (context,index) =>
-                         RecentCardQuran(
-                           recentData: recentDataList[index],
+                   child: Visibility(
+                     visible: recentDataList.isNotEmpty,
+                     replacement: Center(child: Text("No recent Sura",
+                     style: TextStyle(
+                         color: AppColors.white,
+                       fontSize: 16,
+                       fontWeight: FontWeight.bold
+                     ),
+                     )
+                     ),
+                     child: ListView.builder(
+                       padding: const EdgeInsets.symmetric(horizontal: 10),
+                       scrollDirection: Axis.horizontal,
+                       itemBuilder: (context,index) => GestureDetector(
+                         onTap:() {
+                           Navigator.pushNamed(
+                             context,
+                               QuranDetails.routeName,
+                               arguments: recentDataList[index]
+                           );
+                         },
+                         child: RecentCardQuran(
+                             suras: recentDataList[index]
                          ),
-                     itemCount: recentDataList.length,
+                       ),
+                       itemCount: recentDataList.length,
+                     ),
                    ),
                  ),
                  Padding (
@@ -271,13 +291,7 @@ class _QuranScreenState extends State<QuranScreen> {
                    shrinkWrap: true,
                    physics: const NeverScrollableScrollPhysics(),
                    itemBuilder: (context,index)=> GestureDetector(
-                     onTap: (){
-                       Navigator.pushNamed(
-                         context,
-                         QuranDetails.routeName,
-                         arguments: suras[suras[index].id-1],
-                       );
-                     },
+                     onTap:() => onSuraTap(index),
                      child: SuraCardList(
                        sura: suras[index],
                      ),
@@ -297,13 +311,41 @@ class _QuranScreenState extends State<QuranScreen> {
     );
   }
 
-  // onSuraTap(int index){
-  //    Navigator.pushNamed(
-  //     context,
-  //     QuranDetails.routeName,
-  //     arguments: suras[index],
-  //   );
-  // }
+  onSuraTap(int index){
+     cacheSurIndex(index);
+     Navigator.pushNamed(
+      context,
+      QuranDetails.routeName,
+      arguments: suras[index],
+    );
+  }
+  cacheSurIndex(int index) async {
+     var indexString=index.toString();
+     if(recentSuraIndex.contains(indexString)) return;
+     if(recentSuraIndex.length==5) {
+       recentSuraIndex.removeLast();
+     }
+       recentSuraIndex.insert(0, indexString);
+
+   await LocalStorageServices.setList(
+        LocalStoragekey.recentSuras,
+         recentSuraIndex
+     );
+   loadRecentSura();
+   setState(() {});
+  }
+  loadRecentSura(){
+     //LocalStorageServices.remove(LocalStoragekey.recentSuras);
+     recentSuraIndex=[];
+     recentDataList=[];
+      recentSuraIndex = LocalStorageServices.getStringList(
+    LocalStoragekey.recentSuras
+    )??[];
+     for(var index in recentSuraIndex){
+       var  indexInt =int.parse(index);
+       recentDataList.add(suras[indexInt]);
+     }
+  }
 
   void search(){
      searchSuraModel= [];

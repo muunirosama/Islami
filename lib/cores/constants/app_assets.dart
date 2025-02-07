@@ -31,9 +31,4 @@ abstract class AppAssets{
   static String logo200="assets/images/Logo (200).png";
   static String sebhabody="assets/images/SebhaBody 1.png";
   static String masksebha="assets/images/Mask group sebha.png";
-
-
-
-
-
 }

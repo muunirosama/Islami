@@ -6,7 +6,6 @@ import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/feautures/layout/pages/QuranDetails.dart';
 import 'package:islami/feautures/layout/pages/recent%20card%20widget%20quran.dart';
 import 'package:islami/feautures/layout/pages/sura%20card%20list.dart';
-import 'package:islami/models/recent-data.dart';
 import 'package:islami/models/sura.dart';
 
 class QuranScreen extends StatefulWidget {
@@ -335,7 +334,7 @@ class _QuranScreenState extends State<QuranScreen> {
    setState(() {});
   }
   loadRecentSura(){
-     //LocalStorageServices.remove(LocalStoragekey.recentSuras);
+
      recentSuraIndex=[];
      recentDataList=[];
       recentSuraIndex = LocalStorageServices.getStringList(

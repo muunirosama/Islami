@@ -76,16 +76,16 @@ class SplashScreen1 extends StatelessWidget {
                   )
               ),
             ),
-            Align(
-                alignment: Alignment.bottomCenter,
-                child: FadeInUp(
-                  duration: const Duration(seconds: 2),
-                  child: Image.asset(
-                    AppAssets.logo2,
-                    width: size.width * 0.75,
-                  ),
-                )
-            ),
+            // Align(
+            //     alignment: Alignment.bottomCenter,
+            //     child: FadeInUp(
+            //       duration: const Duration(seconds: 2),
+            //       child: Image.asset(
+            //         AppAssets.logo2,
+            //         width: size.width * 0.75,
+            //       ),
+            //     )
+            // ),
             Align(
                 alignment: Alignment.center,
                 child: ZoomIn(

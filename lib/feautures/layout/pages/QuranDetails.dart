@@ -78,7 +78,6 @@ class _QuranDetailsState extends State<QuranDetails> {
             itemCount: versesList.length,
           ),
         )
-
             ],
           ),
         ),

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:islami/cores/services/LocalStorageKeys.dart';
 import 'package:islami/cores/services/localstorage.dart';
-import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/feautures/layout/pages/layout%20page.dart';
 import 'package:islami/feautures/onboarding/pages/on-boardingscreen.dart';
 
@@ -34,7 +33,7 @@ class SplashScreen1 extends StatelessWidget {
            image:AssetImage(
                AppAssets.splashbackground
            ),
-         )
+         ),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -43,7 +42,7 @@ class SplashScreen1 extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
                 child: FadeInDown(
-                  duration: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 4),
                   child: Image.asset(
                       AppAssets.glow,
                     height: size.height * 0.25,
@@ -55,7 +54,7 @@ class SplashScreen1 extends StatelessWidget {
               child: Align(
                   alignment: Alignment.centerLeft,
                   child: FadeInLeft(
-                    duration: const Duration(seconds: 2),
+                    duration: const Duration(seconds: 4),
                     child: Image.asset(
                         AppAssets.leftshape,
                       width: size.width * 0.25,
@@ -68,7 +67,7 @@ class SplashScreen1 extends StatelessWidget {
               child: Align(
                   alignment: Alignment.centerRight,
                   child: FadeInRight(
-                    duration: const Duration(seconds: 2),
+                    duration: const Duration(seconds: 4),
                     child: Image.asset(
                         AppAssets.rightshape,
                       width: size.width * 0.25,
@@ -76,20 +75,11 @@ class SplashScreen1 extends StatelessWidget {
                   )
               ),
             ),
-            // Align(
-            //     alignment: Alignment.bottomCenter,
-            //     child: FadeInUp(
-            //       duration: const Duration(seconds: 2),
-            //       child: Image.asset(
-            //         AppAssets.logo2,
-            //         width: size.width * 0.75,
-            //       ),
-            //     )
-            // ),
+
             Align(
                 alignment: Alignment.center,
                 child: ZoomIn(
-                  duration: const Duration(seconds: 2),
+                  duration: const Duration(seconds: 4),
                   child: Image.asset(
                     AppAssets.logo1,
                     height: size.height * 0.40,

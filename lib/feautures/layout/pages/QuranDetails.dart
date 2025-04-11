@@ -55,7 +55,7 @@ class _QuranDetailsState extends State<QuranDetails> {
             title: Text(
               args.nameEn,
               style: TextStyle(
-                color: Colors.white,
+                color: AppColors.primaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -92,7 +92,7 @@ class _QuranDetailsState extends State<QuranDetails> {
                   args.nameAr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.primaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -127,7 +127,7 @@ class _QuranDetailsState extends State<QuranDetails> {
                                   "[$verseIndex] $verse",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: AppColors.primaryColor,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 24,
                                   ),
@@ -210,10 +210,10 @@ class _QuranDetailsState extends State<QuranDetails> {
   Future<void> _loadLastReadPage(String suraId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      currentPage = prefs.getInt('last_read_page_$suraId') ?? 0; // ✅ استرجاع الصفحة الخاصة بالسورة
+      currentPage = prefs.getInt('last_read_page_$suraId') ?? 0; //  استرجاع الصفحة الخاصة بالسورة
     });
 
-    _pageController = PageController(initialPage: currentPage); // ✅ تحديث المتحكم بالصفحة
+    _pageController = PageController(initialPage: currentPage); //  تحديث المتحكم بالصفحة
   }
 
   /// ✅ **حفظ الصفحة الحالية**

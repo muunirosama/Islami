@@ -14,7 +14,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
   int counter = 0;
   double angle = 0;
   int currentIndex = 0;
-  List<String> list = [ "الحمد لله","استغفر الله العظيم","الله اكبر","لا اله الا الله"];
+  List<String> list = [ "سبحان الله","الحمد لله","استغفر الله العظيم","الله اكبر","لا اله الا الله"];
 
   @override
   Widget build(BuildContext context) {

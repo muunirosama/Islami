@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/cores/constants/app_assets.dart';
+import 'package:islami/cores/themes/app_colors.dart';
 import 'package:islami/models/HeaderSection.dart';
 import 'package:islami/models/PrayerTimeCard.dart';
 import 'package:islami/models/PrayerTimesService.dart';
@@ -50,7 +51,7 @@ class _TimesScreenState extends State<TimesScreen> {
           children: [
             HeaderSection(date: prayerData!["date"]),
             PrayerTimeCard(prayerTimes: prayerData!["timings"]),
-            SizedBox(height: 16,),
+            SizedBox(height: 20,),
           ],
         ),
       ),

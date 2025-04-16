@@ -67,8 +67,8 @@ class _QuranDetailsState extends State<QuranDetails> {
                   color: isBookmarked ? Colors.yellow : Colors.white,
                 ),
                 onPressed: () {
-                  _saveLastReadPage(args.id.toString()); // ✅ تخزين الصفحة الخاصة بالسورة
-                  _toggleBookmark(args.id.toString()); // ✅ تحديث العلامة لهذه السورة
+                  _saveLastReadPage(args.id.toString());
+                  _toggleBookmark(args.id.toString());
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -148,7 +148,6 @@ class _QuranDetailsState extends State<QuranDetails> {
     );
   }
 
-  /// ✅ **تحميل البيانات وتقسيمها إلى صفحات**
   void loadData(String suraId, BuildContext context) async {
     String content = await rootBundle.loadString("assets/files/$suraId.txt");
     List<String> allVerses = content.split("\n");
@@ -158,11 +157,11 @@ class _QuranDetailsState extends State<QuranDetails> {
       pages = splitVersesIntoPages(allVerses, context);
     });
 
-    await _loadLastReadPage(suraId); // ✅ تحميل الصفحة الخاصة بالسورة الحالية بعد تجهيز البيانات
+    await _loadLastReadPage(suraId);
   }
 
 
-  /// ✅ **تقسيم الآيات بناءً على الطول المتاح**
+
   List<List<String>> splitVersesIntoPages(List<String> verses, BuildContext context) {
     List<List<String>> pages = [];
     List<String> currentPage = [];
@@ -195,7 +194,7 @@ class _QuranDetailsState extends State<QuranDetails> {
     return pages;
   }
 
-  /// ✅ **حساب ارتفاع النص**
+
   double getTextHeight(String text, TextStyle style, BuildContext context) {
     TextPainter textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
@@ -206,40 +205,39 @@ class _QuranDetailsState extends State<QuranDetails> {
     return textPainter.height + 16;
   }
 
-  /// ✅ **تحميل آخر صفحة محفوظة**
   Future<void> _loadLastReadPage(String suraId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      currentPage = prefs.getInt('last_read_page_$suraId') ?? 0; //  استرجاع الصفحة الخاصة بالسورة
+      currentPage = prefs.getInt('last_read_page_$suraId') ?? 0;
     });
 
-    _pageController = PageController(initialPage: currentPage); //  تحديث المتحكم بالصفحة
+    _pageController = PageController(initialPage: currentPage);
   }
 
-  /// ✅ **حفظ الصفحة الحالية**
+
   Future<void> _saveLastReadPage(String suraId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('last_read_page_$suraId', currentPage); // ✅ تخزين الصفحة لكل سورة
+    await prefs.setInt('last_read_page_$suraId', currentPage);
   }
-  /// ✅ **تفعيل وإلغاء العلامة المرجعية**
+
   Future<void> _toggleBookmark(String suraId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String bookmarkKey = 'bookmarked_page_$suraId'; // ✅ مفتاح خاص لكل سورة
+    String bookmarkKey = 'bookmarked_page_$suraId';
 
     if (isBookmarked) {
-      await prefs.remove(bookmarkKey); // ✅ إزالة العلامة من هذه السورة فقط
+      await prefs.remove(bookmarkKey);
       setState(() {
         isBookmarked = false;
       });
     } else {
-      await prefs.setInt(bookmarkKey, currentPage); // ✅ حفظ العلامة لهذه السورة فقط
+      await prefs.setInt(bookmarkKey, currentPage);
       setState(() {
         isBookmarked = true;
       });
     }
   }
 
-  /// ✅ **التحقق مما إذا كانت الصفحة محفوظة**
+
   Future<void> _checkIfBookmarked(String suraId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int? bookmarkedPage = prefs.getInt('bookmarked_page_$suraId');
